@@ -1,0 +1,20 @@
+# Environnement virtuel
+venv/
+.venv/
+
+# Fichiers Python générés
+__pycache__/
+*.pyc
+
+# Base de données locale
+*.db
+
+# Cache des tests
+.pytest_cache/
+
+# Secrets / variables d'environnement
+.env
+
+# Fichiers d'éditeur
+.vscode/
+.idea/
