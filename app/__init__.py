@@ -9,15 +9,22 @@ def create_app():
     app = Flask(__name__)
     db.init_db()
 
-    # 2. Afficher la liste des incidents
+    # 2. Afficher la liste des incidents (avec filtre par statut)
     @app.route("/")
     def index():
-        with db.get_connection() as conn:
-            incidents = conn.execute(
-                "SELECT * FROM incidents ORDER BY id DESC"
-            ).fetchall()
-        return render_template("index.html", incidents=incidents)
+        filtre = request.args.get("statut")
+        requete = "SELECT * FROM incidents"
+        params = ()
+        if filtre in STATUTS:
+            requete += " WHERE statut = ?"
+            params = (filtre,)
+        requete += " ORDER BY id DESC"
 
+        with db.get_connection() as conn:
+            incidents = conn.execute(requete, params).fetchall()
+        return render_template(
+            "index.html", incidents=incidents, statuts=STATUTS, filtre=filtre
+        )
     # 1. Ajouter un incident
     @app.route("/incidents/ajouter", methods=["GET", "POST"])
     def ajouter():

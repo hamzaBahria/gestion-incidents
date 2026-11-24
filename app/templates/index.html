@@ -1,6 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <h2>Liste des incidents</h2>
+<p>
+  Filtrer :
+  <a href="{{ url_for('index') }}">Tous</a>
+  {% for s in statuts %}
+  | <a href="{{ url_for('index', statut=s) }}">{{ s }}</a>
+  {% endfor %}
+</p>
 {% if incidents %}
 <table>
   <tr><th>ID</th><th>Titre</th><th>Lieu</th><th>Priorité</th><th>Statut</th><th></th></tr>
