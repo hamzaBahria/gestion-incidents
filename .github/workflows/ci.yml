@@ -29,5 +29,8 @@ jobs:
       - name: Vérifier la configuration Docker Compose
         run: docker compose -f compose.yaml config
 
+      - name: Vérifier la configuration de déploiement
+        run: docker compose -f compose.deploy.yaml config
+
       - name: Construire l'image Docker
         run: docker build -t gestion-incidents:ci .

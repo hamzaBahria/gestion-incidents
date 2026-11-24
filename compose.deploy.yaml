@@ -1,0 +1,12 @@
+services:
+  web:
+    image: ghcr.io/hamzabahria/gestion-incidents:latest
+    container_name: incidents-deploy
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    volumes:
+      - incidents-data:/data
+
+volumes:
+  incidents-data:
